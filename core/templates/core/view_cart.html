@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f8f8f8; /* Added background color to the body */
+        }
+        .container {
+            max-width: 2000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .item-container,
+        .reviews-container { /* Applying the same styles to both item and reviews containers */
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .item-image {
+            flex: 1;
+        }
+        .product-image {
+            width: 40%;
+            height: auto;
+            display: block;
+        }
+        .item-details {
+            flex: 2;
+            padding: 20px;
+        }
+        .item-details h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .item-details p {
+            margin: 0;
+            color: #666;
+        }
+        .item-buttons {
+            margin-top: 20px;
+        }
+        .item-buttons button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #000;
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .item-buttons button:hover {
+            background-color: #f0f0f0;
+        }
+        /* New styles for reviews container */
+        .reviews-container {
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .reviews-details {
+            flex: 1;
+            padding: 20px;
+        }
+        .reviews-details h3 {
+            text-align: center;
+            margin-top: 0;
+        }
+        .reviews-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .reviews-list li {
+            margin-bottom: 20px;
+        }
+        .reviews-list p {
+            margin: 0;
+        }
+       
+textarea {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+ 
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+ 
+button:hover {
+    background-color: #0056b3;
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Shopping Cart</h1>
+    <div class="cart-items">
+        {% for item in cart_items %}
+            <div class="cart-item">
+                <div class="container">
+                    <div class="item-container">
+                        <div class="item-image">
+                            <img class="product-image" src="{{ item.item.image.url }}">
+                            </div>
+                            <div class="item-details">
+                                <h2>{{ item.title }}</h2>
+                                <p>Price: ${{ item.item.price|floatformat:2 }}</p>
+                                <p>Description: {{ item.item.description }}</p>
+                                <p>Quantity: {{ item.quantity }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Your cart is empty.</p>
+        {% endfor %}
+        <div class="cart-summary">
+        <h2>Cart Summary</h2>
+        <p>Total Items: {{ items.count }}</p>
+        <p>Total Price: ${{ total_price|floatformat:2 }}</p>
+        <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+        </div>
+</body>
+</html>
+
+
+{% endblock content %}

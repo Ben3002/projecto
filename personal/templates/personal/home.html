@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<body>
+
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+</body>
+
+
+{% block content %}
+<style type="text/css">
+
+	@media (max-width: 768px) { 
+		.right-column{
+			margin-left: 0px;
+		}
+	}
+
+	@media (min-width: 768px) { 
+		.right-column{
+			margin-left: 20px;
+		}
+	}
+
+	.blog-post-container{
+		margin-bottom: 20px;
+		width: 100%;
+	}
+	.create-post-bar{
+		background-color: #fff;
+		margin-bottom:20px;
+	}
+
+	.left-column{
+		padding:0px;
+	}
+
+	.right-column{
+		padding:0px;
+	}
+	.lead{
+		font-size: 17px;
+	}
+</style>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Shopping Website Nea</title>
+</head>
+<body>
+    <h1>Welcome to Our Store</h1>
+    
+    <div class="product-list">
+        {% for product in home %}
+            <div class="product">
+                <h2>{{ product.name }}</h2>
+                <p>Price: ${{ product.price }}</p>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </div>
+        {% endfor %}
+    </div>
+</body>
+
+
+<!-- main content -->
+<div class="container">
+	<div class="row">
+
+	</div>
+</div>
+
+{% endblock content %}
+

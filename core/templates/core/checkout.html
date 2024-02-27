@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card shadow">
+        <div class="card-body">
+          <h6>Details</h6>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <label>First Name</label>
+              <input type="text" class="form-control" placeholder="First Name">
+            </div>
+            <div class="col-md-6">
+              <label>Last Name</label>
+              <input type="text" class="form-control" placeholder="Last Name">
+            </div>
+            <div class="col-md-6 mt-2">
+              <label>Email</label>
+              <input type="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="col-md-6 mt-2">
+              <label>Phone Number</label>
+              <input type="text" class="form-control" placeholder="Phone Number">
+            </div>
+            <div class="col-md-12 mt-2">
+              <label>Address</label>
+              <textarea type="text" class="form-control" placeholder="Enter Address"></textarea>
+            </div>
+            <div class="col-md-6 mt-2">
+              <label>City</label>
+              <input type="text" class="form-control" placeholder="Enter City">
+            </div>
+            <div class="col-md-6 mt-2">
+              <label>Payment Method</label>
+              <input type="text" class="form-control" placeholder="Select Payment method">
+            </div>
+            <div class='col-md-12 mt-2'>
+              <label>Card Number</label>
+              <input type="text" class="form-control" placeholder="Card number">
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+{% endblock %}

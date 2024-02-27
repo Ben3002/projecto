@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="items-row">
+  {% for item in results %}
+  <div class=" card-item-container">
+    <div class="card item-card">
+    <div class="fixed-height">
+      <img src="{{ item.image.url }}" class="card-img-top item-image my-card-image" alt="{{ item.title }}">
+    </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ item.title }}</h5>
+        <p class="card-text">Price: £{{ item.price|floatformat:2 }}</p>
+        <p> Rating: {{ item.average_rating|floatformat:1 }}/5</p>
+        <a href="#" data-id="{{ item.id }}" class="btn btn-primary add-to-cart">Add to Cart</a>
+        <a href= "{% url 'view_item' item.id %}" class="btn btn-secondary">View Item</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No results found</p>
+  {% endfor %}
+</div>
+
+<style>
+.items-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 20px;
+}
+ 
+.my-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .fixed-height {
+    height: 300px;
+  }
+  .card-item-container {
+    width:300px;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  let addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+  addToCartButtons.forEach(function(button) {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      let itemId = this.getAttribute('data-id');
+
+      // Get the CSRF token
+      let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      console.log("🚀 ~ button.addEventListener ~ csrfToken:", csrfToken)
+
+      fetch('/add/' + itemId + '/', {
+        method: 'POST',
+        headers: {
+          // Include the CSRF token in the request headers
+          'X-CSRFToken': csrfToken
+        }
+      })
+      .then(response => response.json())
+})
+</script>
+
+{% endblock %}

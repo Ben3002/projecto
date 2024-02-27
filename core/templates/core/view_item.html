@@ -1,0 +1,224 @@
+<!-- view_item.html -->
+{% extends "base.html" %}
+
+{% block title %}
+    Product: {{ item.title }}
+{% endblock %}
+
+{% block content %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Product Display</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                background-color: #f8f8f8; /* Added background color to the body */
+            }
+            .container {
+                max-width: 2000px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .item-container,
+            .reviews-container { /* Applying the same styles to both item and reviews containers */
+                display: flex;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                overflow: hidden;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .item-image {
+                flex: 1;
+            }
+            .product-image {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+            .item-details {
+                flex: 2;
+                padding: 20px;
+            }
+            .item-details h2 {
+                margin-top: 0;
+                margin-bottom: 10px;
+                color: #333;
+            }
+            .item-details p {
+                margin: 0;
+                color: #666;
+            }
+            .item-buttons {
+                margin-top: 20px;
+            }
+            .item-buttons button {
+                padding: 10px 20px;
+                cursor: pointer;
+                border: 1px solid #000;
+                background-color: #fff;
+                color: #000;
+                font-weight: bold;
+                border-radius: 4px;
+                transition: background-color 0.3s ease;
+            }
+            .item-buttons button:hover {
+                background-color: #f0f0f0;
+            }
+            /* New styles for reviews container */
+            .reviews-container {
+                display: flex;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .reviews-details {
+                flex: 1;
+                padding: 20px;
+            }
+            .reviews-details h3 {
+                text-align: center;
+                margin-top: 0;
+            }
+            .reviews-list {
+                list-style-type: none;
+                padding: 0;
+            }
+            .reviews-list li {
+                margin-bottom: 20px;
+            }
+            .reviews-list p {
+                margin: 0;
+            }
+    
+            .rating {
+        font-size: 20px;
+        margin: 10px 0;
+    }
+     
+    .stars {
+        font-size: 30px;
+        margin: 10px 0;
+    }
+     
+    .star {
+        cursor: pointer;
+        margin: 0 5px;
+    }
+     
+    .one {
+        color: rgb(255, 0, 0);
+    }
+     
+    .two {
+        color: rgb(255, 106, 0);
+    }
+     
+    .three {
+        color: rgb(251, 255, 120);
+    }
+     
+    .four {
+        color: rgb(255, 255, 0);
+    }
+     
+    .five {
+        color: rgb(24, 159, 14);
+    }
+     
+    textarea {
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+     
+    button {
+        background-color: #007BFF;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+     
+    button:hover {
+        background-color: #0056b3;
+        </style>
+    </head>
+<body>
+
+<div class="container">
+    <div class="item-container">
+        <div class="item-image">
+            <img class="product-image" src="{{ item.image.url }}" alt="{{ item.title }}">
+        </div>
+        <div class="item-details">
+            <h2>{{ item.title }}</h2>
+            <p>Overall Rating: {{ item.average_rating|floatformat:1 }}</p>
+            <p>Price: ${{ item.price|floatformat:2 }}</p>
+            <p>Description: {{ item.description }}</p>
+            <div class="item-buttons">
+                <button>Add to Cart</button>
+                <button>Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+
+<body>
+    <div class="container">
+        <h2>Add Your Review Here.</h2>
+        <form method="post" action="{% url 'add_review' item_id=item.id %}">
+            {% csrf_token %}
+            <label for="id_rating">Rating:</label>
+            <input type="number" id="id_rating" name="rating" min="1" max="5" required>
+            <br>
+            <label for="id_comment"></label>
+            <textarea id="id_comment" name="comment" rows="4" required placeholder="Write your review here..."></textarea>
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+</body>
+
+
+
+<body>
+    <h1>All Reviews</h1>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <div class=reviews-container>
+                    <p class="user">User: {{ review.user.username }}</p>
+                    <p class="rating">Rating: {{ review.rating }}</p>
+                    <p class="comment">Comment: {{ review.comment }}</p>
+                </div>
+            </li>
+        {% empty %}
+            <li class="no-reviews">No reviews available.</li>
+        {% endfor %}
+    </ul>
+</body>
+
+
+
+</html>
+
+
+
+
+{% endblock %}

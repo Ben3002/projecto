@@ -1,0 +1,40 @@
+
+<html lang=en>
+
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+	<meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	 <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+{% include 'snippets/base_css.html' %}
+{% include 'snippets/header.html' %}
+
+<!-- Body -->
+
+<style type="text/css">
+	.main{
+		min-height: 100vh;
+		height: 100%;
+		max-width: 1440px;
+		margin: 0 auto;
+	}
+</style>
+<div class="main">
+	{% block content %}
+
+	{% endblock content %}
+</div>
+<!-- End Body -->
+
+{% include 'snippets/footer.html' %}
+
+</body>
+
+
+</html>
